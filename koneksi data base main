@@ -1,0 +1,27 @@
+package Model;
+
+import java.sql.Statement;
+import java.sql.ResultSet;
+
+public class DataBaseConnectionMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        DataBaseConnection conn = new DataBaseConnection();
+        try {
+            String query = "select * from mahasiswa_login";
+            Statement statement = conn.getConnection().createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+                System.out.println("userName : " + result.getString("username"));
+                System.out.println("password : " + result.getString("password"));
+            }
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println("messages: " + ex.getMessage());
+        }
+    }
+}
